@@ -23,10 +23,10 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/txtBI1"
         android:layout_marginTop="20dp"
-        android:layout_toStartOf="@id/txtProv1"
         android:layout_marginEnd="70dp"
+        android:layout_toStartOf="@id/txtProv1"
         android:text="@string/Mat1"
-        android:textSize="14sp"/>
+        android:textSize="16sp" />
 
     <TextView
         android:id="@+id/txtProv1"
@@ -36,7 +36,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
         android:text="@string/Prov1"
-        android:textSize="14sp"/>
+        android:textSize="16sp" />
 
     <TextView
         android:id="@+id/txtTrab1"
@@ -47,32 +47,84 @@
         android:layout_marginStart="120dp"
         android:layout_marginTop="20dp"
         android:text="@string/Trab1"
-        android:textSize="14sp"
-        android:textAlignment="center"/>
+        android:textAlignment="center"
+        android:textSize="16sp" />
 
     <EditText
         android:id="@+id/edtProv1"
-        android:layout_width="70dp"
-        android:layout_height="30dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_below="@id/txtProv1"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
+        android:hint="@string/Prov1"
         android:inputType="numberDecimal"
-        android:maxLength="2" />
+        android:maxLength="3"
+        android:textSize="16sp"/>
 
     <Spinner
-    android:id="@+id/Spinner01"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_below="@+id/txtMat1"
-    android:layout_marginTop="10dp"
-    android:layout_toStartOf="@id/edtProv1"
-    android:layout_marginEnd="70dp"
-    />
+        android:id="@+id/Spinner01"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txtMat1"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="70dp"
+        android:layout_toStartOf="@id/edtProv1"
+        android:padding="5dp"/>
 
+    <EditText
+        android:id="@+id/edtTrab1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txtTrab1"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="10dp"
+        android:layout_toEndOf="@+id/edtProv1"
+        android:hint="@string/Trab1"
+        android:inputType="numberDecimal"
+        android:maxLength="3"
+        android:textSize="16sp"/>
 
+    <TextView
+        android:id="@+id/txtMed1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/Spinner01"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="70dp"
+        android:layout_toStartOf="@id/txtProv1"
+        android:text="@string/Med1"
+        android:textSize="16sp" />
 
+    <TextView
+        android:id="@+id/txtSit1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/edtProv1"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:text="@string/Prov1"
+        android:textSize="16sp"/>
 
+    <TextView
+        android:id="@+id/txtMedFim1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/common_google_play_services_enable_button"
+        android:layout_below="@+id/txtMed1"
+        android:layout_marginTop="10dp"
+        android:layout_toStartOf="@id/txtProv1"
+        android:layout_marginEnd="70dp"
+        android:textSize="16sp"/>
+    <TextView
+        android:id="@+id/txtSitFim1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="teste"
+        android:layout_below="@+id/txtSit1"
+        android:layout_marginTop="10dp"
+        android:layout_centerHorizontal="true"
+        android:textSize="16sp"/>
 </RelativeLayout>
 
 

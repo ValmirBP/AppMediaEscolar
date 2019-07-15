@@ -36,29 +36,43 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-// inserção de um novo tipo de fonte no layout.
 
-        TextView txt = findViewById(R.id.txtBI1);
+// Instanciando elementos do layout
+
+        TextView txtTit = findViewById(R.id.txtBI1);
+        TextView txtMat1 = findViewById(R.id.txtMat1);
+        TextView txtProv1 = findViewById(R.id.txtProv1);
+        TextView txtTrab1 = findViewById(R.id.txtProv1);
+        Spinner s = findViewById(R.id.Spinner01);
+        TextView edtProv1 = findViewById(R.id.edtProv1);
+        TextView edtTrab1 = findViewById(R.id.edtTrab1);
+        TextView txtMed1 = findViewById(R.id.txtMed1);
+        TextView txtSit1 = findViewById(R.id.txtSit1);
+        TextView txtMedFim1 = findViewById(R.id.txtMedFim1);
+        TextView txtSitFim1 = findViewById(R.id.txtSitFim1);
+
+// Inserção de um novo tipo de fonte no layout.
+
         Typeface font = Typeface.createFromAsset(getAssets(), "print_bold_tt.ttf");
-        txt.setTypeface(font);
-
-        TextView mat1 = findViewById(R.id.txtMat1);
-        TextView prov1 = findViewById(R.id.txtProv1);
-        TextView trab1 = findViewById(R.id.txtTrab1);
-
-        Typeface font1 = Typeface.createFromAsset(getAssets(), "littlelordfontleroynf.ttf");
-        mat1.setTypeface(font1);
-        prov1.setTypeface(font1);
-        trab1.setTypeface(font1);
+        txtTit.setTypeface(font);
+        txtMat1.setTypeface(font);
+        txtProv1.setTypeface(font);
+        txtTrab1.setTypeface(font);
+        //s.setTypeface(font);
+        edtProv1.setTypeface(font);
+        edtTrab1.setTypeface(font);
+        txtMed1.setTypeface(font);
+        txtSit1.setTypeface(font);
+        txtMedFim1.setTypeface(font);
+        txtSitFim1.setTypeface(font);
 
 // Aqui é toda a declaração das listas do dropbox com o nome das matérias
 
-        array_spinner  = new String[]{"Biologia", "Filosofia", "Física", "Química", "História",
+        array_spinner = new String[]{"Biologia", "Filosofia", "Física", "Química", "História",
                 "Língua Portuguesa", Constant.MATEMATICA, "Literatonura", "Geografia", "Sociologia", "Inglês"};
         Arrays.sort(array_spinner);
 
 
-        Spinner s = findViewById(R.id.Spinner01);
         ArrayAdapter adapter = new ArrayAdapter(this,
                 android.R.layout.simple_spinner_item, array_spinner);
         s.setAdapter(adapter);

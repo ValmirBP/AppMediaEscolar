@@ -5,4 +5,5 @@
     <string name="Mat1">Matéria</string>
     <string name="Prov1">Nota Prova</string>
     <string name="Trab1">Nota Trabalho</string>
+    <string name="Med1">Média</string>
 </resources>
