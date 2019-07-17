@@ -10,14 +10,21 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.Arrays;
 
 
 public class MainActivity extends AppCompatActivity {
 
+// Declarando os tipos de variáveis
+
+    double notaProv1, notaTrab1, medfim1;
+    boolean ok = true;
     private String array_spinner[];
 
     @Override
@@ -27,15 +34,15 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                Snackbar.make(view, "App Media Escolar", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
         });
-
 
 // Instanciando elementos do layout
 
@@ -44,17 +51,19 @@ public class MainActivity extends AppCompatActivity {
         TextView txtProv1 = findViewById(R.id.txtProv1);
         TextView txtTrab1 = findViewById(R.id.txtTrab1);
         Spinner s = findViewById(R.id.Spinner01);
-        TextView edtProv1 = findViewById(R.id.edtProv1);
-        TextView edtTrab1 = findViewById(R.id.edtTrab1);
-        TextView txtMed1 = findViewById(R.id.txtMed1);
+        final EditText edtProv1 = findViewById(R.id.edtProv1);
+        final EditText edtTrab1 = findViewById(R.id.edtTrab1);
+        final TextView txtMed1 = findViewById(R.id.txtMed1);
         TextView txtSit1 = findViewById(R.id.txtSit1);
-        TextView txtMedFim1 = findViewById(R.id.txtMedFim1);
-        TextView txtSitFim1 = findViewById(R.id.txtSitFim1);
-
+        final TextView txtMedFim1 = findViewById(R.id.txtMedFim1);
+        final TextView txtSitFim1 = findViewById(R.id.txtSitFim1);
+        Button btnCalc = findViewById(R.id.btnCalc1);
 
 // Inserção de um novo tipo de fonte no layout.
 
-        Typeface font = Typeface.createFromAsset(getAssets(), "print_bold_tt.ttf");
+        Typeface font = Typeface.createFromAsset(getAssets(),
+                "print_bold_tt.ttf");
+
         txtTit.setTypeface(font);
         txtMat1.setTypeface(font);
         txtProv1.setTypeface(font);
@@ -65,36 +74,78 @@ public class MainActivity extends AppCompatActivity {
         txtSit1.setTypeface(font);
         txtMedFim1.setTypeface(font);
         txtSitFim1.setTypeface(font);
+        btnCalc.setTypeface(font);
 
 // Aqui é toda a declaração das listas do dropbox com o nome das matérias
 
-        array_spinner = new String[]{ Constant.MATEMATICA,Constant.BIOLOGIA,Constant.FILOSOFIA,Constant.FISICA,Constant.GEOGRAFIA,Constant.HISTORIA,
-                Constant.INGLES,Constant.LITERATURA,Constant.PORTUGUES,Constant.QUIMICA,Constant.SOCIOLOGIA};
+        array_spinner = new String[]{Constant.MATEMATICA, Constant.BIOLOGIA, Constant.FILOSOFIA, Constant.FISICA, Constant.GEOGRAFIA, Constant.HISTORIA,
+                Constant.INGLES, Constant.LITERATURA, Constant.PORTUGUES, Constant.QUIMICA, Constant.SOCIOLOGIA};
         Arrays.sort(array_spinner);
 
 
-        ArrayAdapter adapter = new ArrayAdapter(this,R.layout.spinner_materia, array_spinner);
+        ArrayAdapter adapter = new ArrayAdapter(this, R.layout.spinner_materia, array_spinner);
         s.setAdapter(adapter);
 
+        btnCalc.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
+// evitando o crash da aplicação
+
+                try {
+
+// verificando se as notas estão inseridas
+
+                    if (edtProv1.getText().toString().length() > 0) {
+                        notaProv1 = Double.parseDouble(edtProv1.getText().toString());
+                    } else {
+                        edtProv1.setError("*");
+                        edtProv1.requestFocus();
+                        ok = false;
+                    }
+                    if (edtTrab1.getText().toString().length() > 0) {
+                        notaTrab1 = Double.parseDouble(edtTrab1.getText().toString());
+                    } else {
+                        edtTrab1.setError("*");
+                        edtTrab1.requestFocus();
+                        ok = false;
+                    }
+
+//Aquisitando notas digitadas
+                    if (ok) {
+                        medfim1 = (notaProv1 + notaTrab1) / 2;
+                        txtMedFim1.setText(String.valueOf(medfim1));
+
+                        if (medfim1 >= 7) txtSitFim1.setText("APROVADO");
+                        else txtSitFim1.setText("REPROVADO");
+                    }
+
+                    // convertendo as minhas variáveis
+                    notaProv1 = Double.parseDouble(edtProv1.getText().toString());
+                    notaTrab1 = Double.parseDouble(edtTrab1.getText().toString());
+
+                } catch (Exception e) {
+
+                    Toast.makeText(getApplicationContext(), "Os campos indicados são obrigatórios", Toast.LENGTH_LONG).show();
+                }
+            }
+        });
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_sair) {
+
+            finish();
+
             return true;
         }
 
