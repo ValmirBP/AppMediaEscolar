@@ -129,6 +129,15 @@
         android:hint="@string/SitFim1"
         android:textSize="16sp"/>
 
+    <Button
+        android:id="@+id/Calc1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/txtSitFim1"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"
+        android:text="@string/Calc1"
+        android:textSize="12sp"/>
 </RelativeLayout>
 
 
