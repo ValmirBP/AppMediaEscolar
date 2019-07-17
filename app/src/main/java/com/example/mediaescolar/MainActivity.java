@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
         TextView txtTit = findViewById(R.id.txtBI1);
         TextView txtMat1 = findViewById(R.id.txtMat1);
         TextView txtProv1 = findViewById(R.id.txtProv1);
-        TextView txtTrab1 = findViewById(R.id.txtProv1);
+        TextView txtTrab1 = findViewById(R.id.txtTrab1);
         Spinner s = findViewById(R.id.Spinner01);
         TextView edtProv1 = findViewById(R.id.edtProv1);
         TextView edtTrab1 = findViewById(R.id.edtTrab1);
@@ -51,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
         TextView txtMedFim1 = findViewById(R.id.txtMedFim1);
         TextView txtSitFim1 = findViewById(R.id.txtSitFim1);
 
+
 // Inserção de um novo tipo de fonte no layout.
 
         Typeface font = Typeface.createFromAsset(getAssets(), "print_bold_tt.ttf");
@@ -58,7 +59,6 @@ public class MainActivity extends AppCompatActivity {
         txtMat1.setTypeface(font);
         txtProv1.setTypeface(font);
         txtTrab1.setTypeface(font);
-        //s.setTypeface(font);
         edtProv1.setTypeface(font);
         edtTrab1.setTypeface(font);
         txtMed1.setTypeface(font);
@@ -68,13 +68,12 @@ public class MainActivity extends AppCompatActivity {
 
 // Aqui é toda a declaração das listas do dropbox com o nome das matérias
 
-        array_spinner = new String[]{"Biologia", "Filosofia", "Física", "Química", "História",
-                "Língua Portuguesa", Constant.MATEMATICA, "Literatonura", "Geografia", "Sociologia", "Inglês"};
+        array_spinner = new String[]{ Constant.MATEMATICA,Constant.BIOLOGIA,Constant.FILOSOFIA,Constant.FISICA,Constant.GEOGRAFIA,Constant.HISTORIA,
+                Constant.INGLES,Constant.LITERATURA,Constant.PORTUGUES,Constant.QUIMICA,Constant.SOCIOLOGIA};
         Arrays.sort(array_spinner);
 
 
-        ArrayAdapter adapter = new ArrayAdapter(this,
-                android.R.layout.simple_spinner_item, array_spinner);
+        ArrayAdapter adapter = new ArrayAdapter(this,R.layout.spinner_materia, array_spinner);
         s.setAdapter(adapter);
 
 

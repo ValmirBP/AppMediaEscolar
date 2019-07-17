@@ -5,5 +5,8 @@
     <string name="Mat1">Matéria</string>
     <string name="Prov1">Nota Prova</string>
     <string name="Trab1">Nota Trabalho</string>
-    <string name="Med1">Média</string>
+    <string name="Med1">Média Final</string>
+    <string name="Sit1">Situação</string>
+    <string name="SitFim1">Sua situação é:</string>
+    <string name="MedFim1">Sua média final é: </string>
 </resources>
