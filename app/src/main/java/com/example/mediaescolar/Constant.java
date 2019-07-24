@@ -15,5 +15,8 @@ public class Constant {
     public static final String LITERATURA = "Literatura";
     public static final String GEOGRAFIA  = "Geografia";
     public static final String SOCIOLOGIA = "Sociologia";
+    public static final String ARTES = "Artes";
+    public static final String ESPORTES = "Esportes";
     public static final String INGLES = "Inglês";
+
 }

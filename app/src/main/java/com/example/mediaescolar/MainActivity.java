@@ -1,6 +1,7 @@
 package com.example.mediaescolar;
 
 import android.graphics.Typeface;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -30,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_primeiro_bi);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -79,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
 // Aqui é toda a declaração das listas do dropbox com o nome das matérias
 
         array_spinner = new String[]{Constant.MATEMATICA, Constant.BIOLOGIA, Constant.FILOSOFIA, Constant.FISICA, Constant.GEOGRAFIA, Constant.HISTORIA,
-                Constant.INGLES, Constant.LITERATURA, Constant.PORTUGUES, Constant.QUIMICA, Constant.SOCIOLOGIA};
+                Constant.INGLES, Constant.LITERATURA, Constant.PORTUGUES, Constant.QUIMICA, Constant.SOCIOLOGIA, Constant.ARTES,Constant.ESPORTES};
         Arrays.sort(array_spinner);
 
 
@@ -90,6 +91,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+//mudando icone de error
+
+                Drawable ic =
+                        getResources().getDrawable(R.drawable.ic_error);
+                if (ic != null){
+                    ic.setBounds(0,0,ic.getIntrinsicWidth(),ic.getIntrinsicHeight());
+                }
+
 // evitando o crash da aplicação
 
                 try {
@@ -99,14 +108,14 @@ public class MainActivity extends AppCompatActivity {
                     if (edtProv1.getText().toString().length() > 0) {
                         notaProv1 = Double.parseDouble(edtProv1.getText().toString());
                     } else {
-                        edtProv1.setError("*");
+                        edtProv1.setError("Campo obrigatório",ic);
                         edtProv1.requestFocus();
                         ok = false;
                     }
                     if (edtTrab1.getText().toString().length() > 0) {
                         notaTrab1 = Double.parseDouble(edtTrab1.getText().toString());
                     } else {
-                        edtTrab1.setError("*");
+                        edtTrab1.setError("Campo obrigatório",ic);
                         edtTrab1.requestFocus();
                         ok = false;
                     }

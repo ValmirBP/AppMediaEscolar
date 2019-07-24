@@ -10,4 +10,9 @@
     <string name="SitFim1">Sua situação é:</string>
     <string name="MedFim1">Sua média final é: </string>
     <string name="Calc1">Calcular</string>
+    <string name="Bi1">1º Bimestre</string>
+    <string name="Bi2">2º Bimestre</string>
+    <string name="Bi3">3º Bimestre</string>
+    <string name="Bi4">4º Bimestre</string>
+    <string name="resFim">Resultado Final</string>
 </resources>

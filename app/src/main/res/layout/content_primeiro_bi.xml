@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".MainActivity"
+    tools:showIn="@layout/activity_primeiro_bi">
+
+    <TextView
+        android:id="@+id/txtBI1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:text="@string/BI1"
+        android:textSize="30sp" />
+
+    <TextView
+        android:id="@+id/txtMat1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/txtBI1"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:text="@string/Mat1"
+        android:textSize="16sp" />
+
+    <Spinner
+        android:id="@+id/Spinner01"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/txtMat1"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="20dp"
+        android:background="#ADD3D0D0" />
+
+    <TextView
+        android:id="@+id/txtProv1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/Spinner01"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="20dp"
+        android:text="@string/Prov1"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/txtTrab1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/Spinner01"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="110dp"
+        android:layout_marginTop="20dp"
+        android:text="@string/Trab1"
+        android:textAlignment="center"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/txtMed1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/Spinner01"
+        android:layout_marginTop="20dp"
+        android:layout_toEndOf="@id/txtTrab1"
+        android:layout_marginStart="40dp"
+        android:text="@string/Med1"
+        android:textSize="16sp"/>
+
+
+    <EditText
+        android:id="@+id/edtProv1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/txtProv1"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="30dp"
+        android:hint="@string/Prov1"
+        android:inputType="numberDecimal"
+        android:maxLength="3"
+        android:textSize="16sp" />
+
+
+    <EditText
+        android:id="@+id/edtTrab1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txtTrab1"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:hint="@string/Trab1"
+        android:inputType="numberDecimal"
+        android:maxLength="3"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/txtMedFim1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/txtMed1"
+        android:layout_marginTop="20dp"
+        android:layout_toEndOf="@id/edtTrab1"
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="20dp"
+        android:textAlignment="center"
+        android:textSize="16sp"
+        android:hint="@string/MedFim1"/>
+
+    <TextView
+        android:id="@+id/txtSit1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/edtProv1"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:text="@string/Sit1"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/txtSitFim1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/txtSit1"
+        android:layout_marginTop="20dp"
+        android:layout_centerHorizontal="true"
+        android:hint="@string/SitFim1"
+        android:textSize="16sp"
+        android:textAlignment="center"/>
+
+    <Button
+        android:id="@+id/btnCalc1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/txtSitFim1"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"
+        android:text="@string/Calc1"
+        android:textSize="12sp"
+        android:textStyle="bold"/>
+</RelativeLayout>
+
+
