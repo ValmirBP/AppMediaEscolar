@@ -6,22 +6,22 @@
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".MainActivity"
-    tools:showIn="@layout/activity_primeiro_bi">
+    tools:showIn="@layout/activity_quarto_bi">
 
     <TextView
-        android:id="@+id/txtBI3"
+        android:id="@+id/txtBI4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
-        android:text="@string/BI1"
+        android:text="@string/Bi4"
         android:textSize="30sp" />
 
     <TextView
         android:id="@+id/txtMat4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/txtBI3"
+        android:layout_below="@id/txtBI4"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
         android:text="@string/Mat1"
@@ -120,7 +120,7 @@
         android:textSize="16sp" />
 
     <TextView
-        android:id="@+id/txtSitFim3"
+        android:id="@+id/txtSitFim4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/txtSit4"
@@ -131,10 +131,10 @@
         android:textAlignment="center"/>
 
     <Button
-        android:id="@+id/btnCalc3"
+        android:id="@+id/btnCalc4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/txtSitFim3"
+        android:layout_below="@id/txtSitFim4"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="50dp"
         android:text="@string/Calc1"
