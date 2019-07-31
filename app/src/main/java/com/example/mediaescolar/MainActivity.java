@@ -1,18 +1,48 @@
 package com.example.mediaescolar;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
+
+import java.text.DecimalFormat;
+import java.util.Arrays;
+
 
 public class MainActivity extends AppCompatActivity {
 
-Button btn1Bi,btn2Bi,btn3Bi,btn4Bi,btnResFim;
+    Button btn1Bi, btn2Bi, btn3Bi, btn4Bi, btnResFim;
+
+    String txtMedFim1;
+    String txtSitFim1;
+    int txtmat1 = 0;
+    String txtMedFim2;
+    String txtSitFim2;
+    int txtmat2 = 0;
+    String txtMedFim3;
+    String txtSitFim3;
+    int txtmat3 = 0;
+    String txtMedFim4;
+    String txtSitFim4;
+    int txtmat4 = 0;
+
+    boolean bi1, bi2, bi3, bi4;
+
+    Double notaProv1, notaTrab1, medfim1,
+            notaProv2, notaTrab2, medfim2,
+            notaProv3, notaTrab3, medfim3,
+            notaProv4, notaTrab4, medfim4,
+            resFim;
+
+    public static final String SHARED_PREF = "medEscPref";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,19 +57,26 @@ Button btn1Bi,btn2Bi,btn3Bi,btn4Bi,btnResFim;
         btn4Bi = findViewById(R.id.btn4Bi);
         btnResFim = findViewById(R.id.btnResFim);
 
+        btn2Bi.setEnabled(bi2);
+        btn3Bi.setEnabled(bi3);
+        btn4Bi.setEnabled(bi4);
+
+       // clearSharedPreferences();
+
         btn1Bi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent nxScreen =
-                        new Intent(MainActivity.this,PrimeiroBiActivity.class);
+                        new Intent(MainActivity.this, PrimeiroBiActivity.class);
                 startActivity(nxScreen);
             }
         });
+
         btn2Bi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent nxScreen =
-                        new Intent(MainActivity.this,SegundoBiActivity.class);
+                        new Intent(MainActivity.this, SegundoBiActivity.class);
                 startActivity(nxScreen);
 
             }
@@ -49,7 +86,7 @@ Button btn1Bi,btn2Bi,btn3Bi,btn4Bi,btnResFim;
             @Override
             public void onClick(View v) {
                 Intent nxScreen =
-                        new Intent(MainActivity.this,TerceiroBiActivity.class);
+                        new Intent(MainActivity.this, TerceiroBiActivity.class);
                 startActivity(nxScreen);
             }
         });
@@ -62,23 +99,157 @@ Button btn1Bi,btn2Bi,btn3Bi,btn4Bi,btnResFim;
                 startActivity(nxScreen);
             }
         });
-        btnResFim.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                Toast.makeText(getApplicationContext(),"btnResFim",Toast.LENGTH_LONG).show();
-
-            }
-        });
 
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "App Media Escolar", Snackbar.LENGTH_LONG)
+                Snackbar.make(view, "Dados apagados ", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
+
+                clearSharedPreferences();
             }
         });
 
+        result();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        int id = item.getItemId();
+
+
+        if (id == R.id.action_sair) {
+
+            finish();
+
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        readPref();
+        result();
+
+    }
+
+    private void readPref() {
+        SharedPreferences medEscPref =
+                getSharedPreferences(MainActivity.SHARED_PREF, 0);
+
+        bi1 = medEscPref.getBoolean("bi1", false);
+        txtmat1 = Integer.parseInt(medEscPref.getString("txtmat1", "0"));
+        txtSitFim1 = medEscPref.getString("txtSitFim1", "");
+        txtMedFim1 = medEscPref.getString("txtMedFim1", "");
+        notaTrab1 = Double.parseDouble(medEscPref.getString("notaTrab1", "0.0"));
+        notaProv1 = Double.parseDouble(medEscPref.getString("notaProv1", "0.0"));
+        medfim1 = Double.parseDouble(medEscPref.getString("medfim1", "0.0"));
+
+        bi2 = medEscPref.getBoolean("bi2", false);
+        txtmat2 = Integer.parseInt(medEscPref.getString("txtmat2", "0"));
+        txtSitFim2 = medEscPref.getString("txtSitFim2", "");
+        txtMedFim2 = medEscPref.getString("txtMedFim2", "");
+        notaTrab2 = Double.parseDouble(medEscPref.getString("notaTrab2", "0.0"));
+        notaProv2 = Double.parseDouble(medEscPref.getString("notaProv2", "0.0"));
+        medfim2 = Double.parseDouble(medEscPref.getString("medfim2", "0.0"));
+
+        bi3 = medEscPref.getBoolean("bi3", false);
+        txtmat3 = Integer.parseInt(medEscPref.getString("txtmat3", "0"));
+        txtSitFim3 = medEscPref.getString("txtSitFim3", "");
+        txtMedFim3 = medEscPref.getString("txtMedFim3", "");
+        notaTrab3 = Double.parseDouble(medEscPref.getString("notaTrab3", "0.0"));
+        notaProv3 = Double.parseDouble(medEscPref.getString("notaProv3", "0.0"));
+        medfim3 = Double.parseDouble(medEscPref.getString("medfim3", "0.0"));
+
+        bi4 = medEscPref.getBoolean("bi4", false);
+        txtmat4 = Integer.parseInt(medEscPref.getString("txtmat4", "0"));
+        txtSitFim4 = medEscPref.getString("txtSitFim4", "");
+        txtMedFim4 = medEscPref.getString("txtMedFim4", "");
+        notaTrab4 = Double.parseDouble(medEscPref.getString("notaTrab4", "0.0"));
+        notaProv4 = Double.parseDouble(medEscPref.getString("notaProv4", "0.0"));
+        medfim4 = Double.parseDouble(medEscPref.getString("medfim4", "0.0"));
+    }
+
+    private void result() {
+
+//declaração e instancia do array
+
+        String array_spinner[];
+
+        array_spinner = new String[]{Constant.MATEMATICA, Constant.BIOLOGIA, Constant.FILOSOFIA, Constant.FISICA, Constant.GEOGRAFIA, Constant.HISTORIA,
+                Constant.INGLES, Constant.LITERATURA, Constant.PORTUGUES, Constant.QUIMICA, Constant.SOCIOLOGIA, Constant.ARTES, Constant.ESPORTES};
+        Arrays.sort(array_spinner);
+
+        if (bi1) {
+            btn1Bi.setText(array_spinner[txtmat1] + " - 1º Bimestre " + txtSitFim1 + "- Nota " + medfim1); //==> aquisição da posição e valor  inserido no arry para leitura de shared pref
+            btn1Bi.setEnabled(false);
+            btn2Bi.setEnabled(bi1);
+        }
+
+        if (bi2) {
+            btn2Bi.setText(array_spinner[txtmat2] + " - 2º Bimestre " + txtSitFim2 + "- Nota " + medfim2); //==> aquisição da posição e valor  inserido no arry para leitura de shared pref
+            btn2Bi.setEnabled(false);
+            btn3Bi.setEnabled(bi2);
+        }
+
+        if (bi3) {
+            btn3Bi.setText(array_spinner[txtmat3] + " - 3º Bimestre " + txtSitFim3 + "- Nota " + medfim3); //==> aquisição da posição e valor  inserido no arry para leitura de shared pref
+            btn3Bi.setEnabled(false);
+            btn4Bi.setEnabled(bi3);
+        }
+
+        if (bi4) {
+            btn4Bi.setText(array_spinner[txtmat4] + " - 4º Bimestre " + txtSitFim4 + "- Nota " + medfim4); //==> aquisição da posição e valor  inserido no arry para leitura de shared pref
+            btn4Bi.setEnabled(false);
+            btnResFim.setEnabled(true);
+
+
+            resFim = (medfim1 + medfim2 + medfim3 + medfim4) / 4;
+            double resFim = 10.0;
+            DecimalFormat formato = new DecimalFormat("#.#");
+            resFim = Double.valueOf(formato.format(resFim));
+
+
+
+            String test = " sua média final é " + (resFim);//==> uma forma de limpar o código
+            btnResFim.setText(test);
+        }
+    }
+
+    private void clearSharedPreferences() {
+        SharedPreferences medEscPref = getSharedPreferences(SHARED_PREF, 0);
+        SharedPreferences.Editor editor = medEscPref.edit();
+        editor.clear();
+        editor.commit();
+        clearMenu();
+    }
+
+    private void clearMenu() {
+
+        btnResFim.setEnabled(false);
+        btn4Bi.setEnabled(false);
+        btn3Bi.setEnabled(false);
+        btn2Bi.setEnabled(false);
+        btn1Bi.setEnabled(true);
+
+        btnResFim.setText("RESULTADO FINAL");
+        btn4Bi.setText("4º Bimestre");
+        btn3Bi.setText("3º Bimestre");
+        btn2Bi.setText("2º Bimestre");
+        btn1Bi.setText("1º Bimestre");
     }
 }
+

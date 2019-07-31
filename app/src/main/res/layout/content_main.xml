@@ -28,7 +28,7 @@
         android:text="@string/Bi2"
         android:textSize="14sp"
         android:textStyle="bold|italic"
-        android:enabled="true"/>
+        android:enabled="false"/>
     <Button
         android:id="@+id/btn3Bi"
         android:layout_width="match_parent"
@@ -37,7 +37,7 @@
         android:text="@string/Bi3"
         android:textSize="14sp"
         android:textStyle="bold|italic"
-        android:enabled="true"/>
+        android:enabled="false"/>
     <Button
         android:id="@+id/btn4Bi"
         android:layout_width="match_parent"
@@ -46,7 +46,7 @@
         android:text="@string/Bi4"
         android:textSize="14sp"
         android:textStyle="bold|italic"
-        android:enabled="true"/>
+        android:enabled="false"/>
     <Button
         android:id="@+id/btnResFim"
         android:layout_width="match_parent"
@@ -55,7 +55,7 @@
         android:text="@string/resFim"
         android:textSize="14sp"
         android:textStyle="bold|italic"
-        android:enabled="true"/>
+        android:enabled="false"/>
 </LinearLayout>
 
 

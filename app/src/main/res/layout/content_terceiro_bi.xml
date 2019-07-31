@@ -28,7 +28,7 @@
         android:textSize="16sp" />
 
     <Spinner
-        android:id="@+id/Spinner04"
+        android:id="@+id/Spinner03"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/txtMat3"
@@ -38,20 +38,20 @@
         android:background="#ADD3D0D0" />
 
     <TextView
-        android:id="@+id/txtProv4"
+        android:id="@+id/txtProv3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/Spinner04"
+        android:layout_below="@id/Spinner03"
         android:layout_marginStart="30dp"
         android:layout_marginTop="20dp"
         android:text="@string/Prov1"
         android:textSize="16sp" />
 
     <TextView
-        android:id="@+id/txtTrab4"
+        android:id="@+id/txtTrab3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/Spinner04"
+        android:layout_below="@id/Spinner03"
         android:layout_centerHorizontal="true"
         android:layout_marginStart="110dp"
         android:layout_marginTop="20dp"
@@ -60,22 +60,22 @@
         android:textSize="16sp" />
 
     <TextView
-        android:id="@+id/txtMed4"
+        android:id="@+id/txtMed3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/Spinner04"
+        android:layout_below="@id/Spinner03"
         android:layout_marginTop="20dp"
-        android:layout_toEndOf="@id/txtTrab4"
+        android:layout_toEndOf="@id/txtTrab3"
         android:layout_marginStart="40dp"
         android:text="@string/Med1"
         android:textSize="16sp"/>
 
 
     <EditText
-        android:id="@+id/edtProv4"
+        android:id="@+id/edtProv3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/txtProv4"
+        android:layout_below="@id/txtProv3"
         android:layout_marginTop="10dp"
         android:layout_marginStart="30dp"
         android:hint="@string/Prov1"
@@ -85,10 +85,10 @@
 
 
     <EditText
-        android:id="@+id/edtTrab4"
+        android:id="@+id/edtTrab3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/txtTrab4"
+        android:layout_below="@+id/txtTrab3"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
         android:hint="@string/Trab1"
@@ -97,12 +97,12 @@
         android:textSize="16sp" />
 
     <TextView
-        android:id="@+id/txtMedFim4"
+        android:id="@+id/txtMedFim3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/txtMed4"
+        android:layout_below="@id/txtMed3"
         android:layout_marginTop="20dp"
-        android:layout_toEndOf="@id/edtTrab4"
+        android:layout_toEndOf="@id/edtTrab3"
         android:layout_marginStart="40dp"
         android:layout_marginEnd="20dp"
         android:textAlignment="center"
@@ -110,10 +110,10 @@
         android:hint="@string/MedFim1"/>
 
     <TextView
-        android:id="@+id/txtSit4"
+        android:id="@+id/txtSit3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/edtProv4"
+        android:layout_below="@id/edtProv3"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
         android:text="@string/Sit1"
@@ -123,7 +123,7 @@
         android:id="@+id/txtSitFim3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/txtSit4"
+        android:layout_below="@id/txtSit3"
         android:layout_marginTop="20dp"
         android:layout_centerHorizontal="true"
         android:hint="@string/SitFim1"
@@ -141,5 +141,3 @@
         android:textSize="12sp"
         android:textStyle="bold"/>
 </RelativeLayout>
-
-
