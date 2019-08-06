@@ -19,7 +19,11 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.lang.reflect.Field;
+import java.text.DecimalFormat;
 import java.util.Arrays;
+
+import static com.example.mediaescolar.MainActivity.SHARED_PREF;
 
 public class SegundoBiActivity extends AppCompatActivity {
 
@@ -79,6 +83,19 @@ public class SegundoBiActivity extends AppCompatActivity {
         array_spinner = new String[]{Constant.MATEMATICA, Constant.BIOLOGIA, Constant.FILOSOFIA, Constant.FISICA, Constant.GEOGRAFIA, Constant.HISTORIA,
                 Constant.INGLES, Constant.LITERATURA, Constant.PORTUGUES, Constant.QUIMICA, Constant.SOCIOLOGIA, Constant.ARTES, Constant.ESPORTES};
         Arrays.sort(array_spinner);
+
+        try {
+            Field popup = Spinner.class.getDeclaredField("mPopup");
+            popup.setAccessible(true);
+
+            // Get private mPopup member variable and try cast to ListPopupWindow
+            android.widget.ListPopupWindow popupWindow = (android.widget.ListPopupWindow) popup.get(s);
+
+            // Set popupWindow height to 500px
+            popupWindow.setHeight(500);
+        } catch (NoClassDefFoundError | ClassCastException | NoSuchFieldException | IllegalAccessException e) {
+            // silently fail...
+        }
 
 
         ArrayAdapter adapter = new ArrayAdapter(this, R.layout.spinner_materia, array_spinner);
@@ -157,7 +174,13 @@ public class SegundoBiActivity extends AppCompatActivity {
 
                     if (ok) {
                         medfim2 = (notaProv2 + notaTrab2) / 2;
-                        txtMedFim2.setText(String.valueOf(medfim2));
+
+                        DecimalFormat fmt = new DecimalFormat("0.0");
+                        String string = fmt.format(medfim2);
+                        String[] part = string.split("[,]");
+                        String r2 = part[0] + "." + part[1];
+
+                        txtMedFim2.setText(r2);
 
                         if (medfim2 >= 7) txtSitFim2.setText("APROVADO");
                         else txtSitFim2.setText("REPROVADO");
@@ -182,28 +205,18 @@ public class SegundoBiActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Snackbar.make(view, "App Media Escolar", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
+
+                clearBi2();
+
             }
         });
+
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-
-        if (id == R.id.action_sair) {
-
-            finish();
-
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
     }
 
     private void sharedPreferences() {
@@ -221,5 +234,26 @@ public class SegundoBiActivity extends AppCompatActivity {
         medEsc.putBoolean("bi2", true);
 
         medEsc.commit();
+    }
+
+    private void clearBi2() {
+
+        edtProv2.setText("");
+        edtTrab2.setText("");
+        txtSitFim2.setText("Sua situação é :");
+        txtMedFim2.setText("Sua média final é:");
+        s.setSelection(0);
+        medfim2 = 0;
+        notaTrab2 = 0;
+        notaProv2 = 0;
+
+        clearSharedPreferences();
+    }
+
+    private void clearSharedPreferences() {
+        SharedPreferences medEscPref = getSharedPreferences(SHARED_PREF, 0);
+        SharedPreferences.Editor editor = medEscPref.edit();
+        editor.clear();
+        editor.commit();
     }
 }

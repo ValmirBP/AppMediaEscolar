@@ -18,7 +18,11 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.lang.reflect.Field;
+import java.text.DecimalFormat;
 import java.util.Arrays;
+
+import static com.example.mediaescolar.MainActivity.SHARED_PREF;
 
 public class TerceiroBiActivity extends AppCompatActivity {
 
@@ -80,6 +84,19 @@ public class TerceiroBiActivity extends AppCompatActivity {
                 Constant.INGLES, Constant.LITERATURA, Constant.PORTUGUES, Constant.QUIMICA, Constant.SOCIOLOGIA, Constant.ARTES, Constant.ESPORTES};
         Arrays.sort(array_spinner);
 
+        try {
+            Field popup = Spinner.class.getDeclaredField("mPopup");
+            popup.setAccessible(true);
+
+            // Get private mPopup member variable and try cast to ListPopupWindow
+            android.widget.ListPopupWindow popupWindow = (android.widget.ListPopupWindow) popup.get(s);
+
+            // Set popupWindow height to 500px
+            popupWindow.setHeight(500);
+        } catch (NoClassDefFoundError | ClassCastException | NoSuchFieldException | IllegalAccessException e) {
+            // silently fail...
+        }
+
 
         ArrayAdapter adapter = new ArrayAdapter(this, R.layout.spinner_materia, array_spinner);
         s.setAdapter(adapter);
@@ -105,12 +122,12 @@ public class TerceiroBiActivity extends AppCompatActivity {
                     if (edtProv3.getText().toString().length() > 0) {
                         notaProv3 = Double.parseDouble(edtProv3.getText().toString());
 
-                        if(notaProv3 > 10){
+                        if (notaProv3 > 10) {
                             ok = false;
-                            Toast.makeText(getApplicationContext(),"Nota Invalida",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), "Nota Invalida", Toast.LENGTH_SHORT).show();
                             edtProv3.requestFocus();
 
-                        }else {
+                        } else {
                             ok = true;
                         }
 
@@ -123,12 +140,12 @@ public class TerceiroBiActivity extends AppCompatActivity {
                     if (edtTrab3.getText().toString().length() > 0) {
                         notaTrab3 = Double.parseDouble(edtTrab3.getText().toString());
 
-                        if ( notaTrab3 > 10){
+                        if (notaTrab3 > 10) {
                             ok = false;
-                            Toast.makeText(getApplicationContext(),"Nota Invalida",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), "Nota Invalida", Toast.LENGTH_SHORT).show();
                             edtTrab3.requestFocus();
 
-                        }else {
+                        } else {
                             ok = true;
                         }
 
@@ -142,7 +159,13 @@ public class TerceiroBiActivity extends AppCompatActivity {
 
                     if (ok) {
                         medfim3 = (notaProv3 + notaTrab3) / 2;
-                        txtMedFim3.setText(String.valueOf(medfim3));
+
+                        DecimalFormat fmt = new DecimalFormat("0.0");
+                        String string = fmt.format(medfim3);
+                        String[] part = string.split("[,]");
+                        String r3 = part[0] + "." + part[1];
+
+                        txtMedFim3.setText(r3);
 
                         if (medfim3 >= 7) txtSitFim3.setText("APROVADO");
                         else txtSitFim3.setText("REPROVADO");
@@ -167,28 +190,17 @@ public class TerceiroBiActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Snackbar.make(view, "App Media Escolar", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
+
+                clearBi3();
             }
         });
+
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-
-        if (id == R.id.action_sair) {
-
-            finish();
-
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
     }
 
     private void sharedPerferences() {
@@ -207,5 +219,26 @@ public class TerceiroBiActivity extends AppCompatActivity {
 
         medEsc.commit();
 
+    }
+
+    private void clearBi3() {
+
+        edtProv3.setText("");
+        edtTrab3.setText("");
+        txtSitFim3.setText("Sua situação é :");
+        txtMedFim3.setText("Sua média final é:");
+        s.setSelection(0);
+        medfim3 = 0;
+        notaTrab3 = 0;
+        notaProv3 = 0;
+
+        clearSharedPreferences();
+    }
+
+    private void clearSharedPreferences() {
+        SharedPreferences medEscPref = getSharedPreferences(SHARED_PREF, 0);
+        SharedPreferences.Editor editor = medEscPref.edit();
+        editor.clear();
+        editor.commit();
     }
 }

@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginRight="15dp"
-    android:layout_marginLeft="15dp"
+    android:background="@drawable/background_all_act"
     android:orientation="vertical"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".MainActivity"
@@ -15,47 +14,70 @@
         android:id="@+id/btn1Bi"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
         android:layout_marginTop="20dp"
+        android:layout_marginRight="15dp"
+        android:background="@drawable/btn_style_complete"
         android:text="@string/Bi1"
+        android:textColor="#ffffff"
         android:textSize="14sp"
-        android:textStyle="bold|italic"/>
+        android:textStyle="bold|italic" />
 
     <Button
         android:id="@+id/btn2Bi"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
         android:layout_marginTop="20dp"
+        android:layout_marginRight="15dp"
+        android:background="@drawable/btn_style_complete"
+        android:enabled="false"
         android:text="@string/Bi2"
+        android:textColor="#ffffff"
         android:textSize="14sp"
-        android:textStyle="bold|italic"
-        android:enabled="false"/>
+        android:textStyle="bold|italic" />
+
     <Button
         android:id="@+id/btn3Bi"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
         android:layout_marginTop="20dp"
+        android:layout_marginRight="15dp"
+        android:background="@drawable/btn_style_complete"
+        android:enabled="false"
         android:text="@string/Bi3"
+        android:textColor="#ffffff"
         android:textSize="14sp"
-        android:textStyle="bold|italic"
-        android:enabled="false"/>
+        android:textStyle="bold|italic" />
+
     <Button
         android:id="@+id/btn4Bi"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
         android:layout_marginTop="20dp"
+        android:layout_marginRight="15dp"
+        android:background="@drawable/btn_style_complete"
+        android:enabled="false"
         android:text="@string/Bi4"
+        android:textColor="#ffffff"
         android:textSize="14sp"
-        android:textStyle="bold|italic"
-        android:enabled="false"/>
+        android:textStyle="bold|italic" />
+
     <Button
         android:id="@+id/btnResFim"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
         android:layout_marginTop="20dp"
+        android:layout_marginRight="15dp"
+        android:background="@drawable/btn_style_complete"
+        android:enabled="false"
         android:text="@string/resFim"
+        android:textColor="#ffffff"
         android:textSize="14sp"
-        android:textStyle="bold|italic"
-        android:enabled="false"/>
+        android:textStyle="bold|italic" />
 </LinearLayout>
 
 

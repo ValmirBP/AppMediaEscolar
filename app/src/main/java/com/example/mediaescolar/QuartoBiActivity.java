@@ -19,7 +19,11 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.lang.reflect.Field;
+import java.text.DecimalFormat;
 import java.util.Arrays;
+
+import static com.example.mediaescolar.MainActivity.SHARED_PREF;
 
 public class QuartoBiActivity extends AppCompatActivity {
 
@@ -81,6 +85,18 @@ public class QuartoBiActivity extends AppCompatActivity {
                 Constant.INGLES, Constant.LITERATURA, Constant.PORTUGUES, Constant.QUIMICA, Constant.SOCIOLOGIA, Constant.ARTES, Constant.ESPORTES};
         Arrays.sort(array_spinner);
 
+        try {
+            Field popup = Spinner.class.getDeclaredField("mPopup");
+            popup.setAccessible(true);
+
+            // Get private mPopup member variable and try cast to ListPopupWindow
+            android.widget.ListPopupWindow popupWindow = (android.widget.ListPopupWindow) popup.get(s);
+
+            // Set popupWindow height to 500px
+            popupWindow.setHeight(500);
+        } catch (NoClassDefFoundError | ClassCastException | NoSuchFieldException | IllegalAccessException e) {
+            // silently fail...
+        }
 
         ArrayAdapter adapter = new ArrayAdapter(this, R.layout.spinner_materia, array_spinner);
         s.setAdapter(adapter);
@@ -138,12 +154,12 @@ public class QuartoBiActivity extends AppCompatActivity {
                     if (edtTrab4.getText().toString().length() > 0) {
                         notaTrab4 = Double.parseDouble(edtTrab4.getText().toString());
 
-                        if (notaTrab4 > 10){
+                        if (notaTrab4 > 10) {
                             ok = true;
-                            Toast.makeText(getApplicationContext(),"Nota Invalida",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), "Nota Invalida", Toast.LENGTH_SHORT).show();
                             edtTrab4.requestFocus();
 
-                        }else {
+                        } else {
                             ok = true;
                         }
 
@@ -156,7 +172,13 @@ public class QuartoBiActivity extends AppCompatActivity {
 //Aquisitando notas digitadas
                     if (ok) {
                         medfim4 = (notaProv4 + notaTrab4) / 2;
-                        txtMedFim4.setText(String.valueOf(medfim4));
+
+                        DecimalFormat fmt = new DecimalFormat("0.0");
+                        String string = fmt.format(medfim4);
+                        String[] part = string.split("[,]");
+                        String r4 = part[0] + "." + part[1];
+
+                        txtMedFim4.setText(r4);
 
                         if (medfim4 >= 7) txtSitFim4.setText("APROVADO");
                         else txtSitFim4.setText("REPROVADO");
@@ -181,6 +203,8 @@ public class QuartoBiActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Snackbar.make(view, "App Media Escolar", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
+
+                clearBi4();
             }
         });
 
@@ -192,19 +216,6 @@ public class QuartoBiActivity extends AppCompatActivity {
         return true;
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-
-        if (id == R.id.action_sair) {
-
-            finish();
-
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
 
     private void sharedPerferences() {
         SharedPreferences medEscPref =
@@ -223,4 +234,27 @@ public class QuartoBiActivity extends AppCompatActivity {
         medEsc.commit();
 
     }
+
+    private void clearBi4() {
+
+        edtProv4.setText("");
+        edtTrab4.setText("");
+        txtSitFim4.setText("Sua situação é :");
+        txtMedFim4.setText("Sua média final é:");
+        s.setSelection(0);
+        medfim4 = 0;
+        notaTrab4 = 0;
+        notaProv4 = 0;
+
+        clearSharedPreferences();
+    }
+
+    private void clearSharedPreferences() {
+        SharedPreferences medEscPref = getSharedPreferences(SHARED_PREF, 0);
+        SharedPreferences.Editor editor = medEscPref.edit();
+        editor.clear();
+        editor.commit();
+    }
+
+
 }

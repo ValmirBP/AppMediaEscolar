@@ -12,6 +12,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import java.text.DecimalFormat;
 import java.util.Arrays;
@@ -21,26 +22,16 @@ public class MainActivity extends AppCompatActivity {
 
     Button btn1Bi, btn2Bi, btn3Bi, btn4Bi, btnResFim;
 
-    String txtMedFim1;
-    String txtSitFim1;
-    int txtmat1 = 0;
-    String txtMedFim2;
-    String txtSitFim2;
-    int txtmat2 = 0;
-    String txtMedFim3;
-    String txtSitFim3;
-    int txtmat3 = 0;
-    String txtMedFim4;
-    String txtSitFim4;
-    int txtmat4 = 0;
+    String txtMedFim1, txtSitFim1, txtMedFim4, txtSitFim4, txtMedFim2,
+            txtSitFim2, txtMedFim3, txtSitFim3;
+
+    double notaProv1, notaTrab1, medfim1, notaProv2, notaTrab2, medfim2,
+            notaProv3, notaTrab3, medfim3, notaProv4, notaTrab4, medfim4,
+            resFim;
+
+    int txtmat1 = 0, txtmat2 = 0, txtmat3 = 0, txtmat4 = 0;
 
     boolean bi1, bi2, bi3, bi4;
-
-    Double notaProv1, notaTrab1, medfim1,
-            notaProv2, notaTrab2, medfim2,
-            notaProv3, notaTrab3, medfim3,
-            notaProv4, notaTrab4, medfim4,
-            resFim;
 
     public static final String SHARED_PREF = "medEscPref";
 
@@ -61,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
         btn3Bi.setEnabled(bi3);
         btn4Bi.setEnabled(bi4);
 
-       // clearSharedPreferences();
+        clearSharedPreferences();
 
         btn1Bi.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -97,6 +88,27 @@ public class MainActivity extends AppCompatActivity {
                 Intent nxScreen =
                         new Intent(MainActivity.this, QuartoBiActivity.class);
                 startActivity(nxScreen);
+            }
+        });
+        btnResFim.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                DecimalFormat fmt2 = new DecimalFormat("0.0");
+                String string2 = fmt2.format(resFim);
+                String[] part2 = string2.split("[,]");
+                String r = part2[0] + "." + part2[1];
+
+                if (resFim > 7) {
+                    Toast.makeText(getApplicationContext(), "Aluno aprovado por média", Toast.LENGTH_LONG).show();
+                    String test = " sua média final é:  " + (r);//==> uma forma de limpar o código
+                    btnResFim.setText(test);
+                } else {
+                    Toast.makeText(getApplicationContext(), "Aluno reprovado por média", Toast.LENGTH_LONG).show();
+                    String test = " sua média final é:  " + (r);//==> uma forma de limpar o código
+                    btnResFim.setText(test);
+
+                }
             }
         });
 
@@ -194,38 +206,71 @@ public class MainActivity extends AppCompatActivity {
         Arrays.sort(array_spinner);
 
         if (bi1) {
-            btn1Bi.setText(array_spinner[txtmat1] + " - 1º Bimestre " + txtSitFim1 + "- Nota " + medfim1); //==> aquisição da posição e valor  inserido no arry para leitura de shared pref
+
+// limitando o número de casas decimais e transformando , em .
+
+            DecimalFormat fmt = new DecimalFormat("0.0");
+            String string = fmt.format(medfim1);
+            String[] part = string.split("[,]");
+            String r1 = part[0] + "." + part[1];
+
+            btn1Bi.setText(array_spinner[txtmat1] + " - 1º Bimestre " + " - " + txtSitFim1 + " - Nota " + r1); //==> aquisição da posição e valor  inserido no arry para leitura de shared pref
             btn1Bi.setEnabled(false);
             btn2Bi.setEnabled(bi1);
         }
 
         if (bi2) {
-            btn2Bi.setText(array_spinner[txtmat2] + " - 2º Bimestre " + txtSitFim2 + "- Nota " + medfim2); //==> aquisição da posição e valor  inserido no arry para leitura de shared pref
+
+            DecimalFormat fmt = new DecimalFormat("0.0");
+            String string = fmt.format(medfim2);
+            String[] part = string.split("[,]");
+            String r2 = part[0] + "." + part[1];
+
+            btn2Bi.setText(array_spinner[txtmat2] + " - 2º Bimestre " + " - " + txtSitFim2 + " - Nota " + r2); //==> aquisição da posição e valor  inserido no arry para leitura de shared pref
             btn2Bi.setEnabled(false);
             btn3Bi.setEnabled(bi2);
         }
 
         if (bi3) {
-            btn3Bi.setText(array_spinner[txtmat3] + " - 3º Bimestre " + txtSitFim3 + "- Nota " + medfim3); //==> aquisição da posição e valor  inserido no arry para leitura de shared pref
+
+            DecimalFormat fmt = new DecimalFormat("0.0");
+            String string = fmt.format(medfim3);
+            String[] part = string.split("[,]");
+            String r3 = part[0] + "." + part[1];
+
+            btn3Bi.setText(array_spinner[txtmat3] + " - 3º Bimestre " + " - " + txtSitFim3 + " - Nota " + r3); //==> aquisição da posição e valor  inserido no arry para leitura de shared pref
             btn3Bi.setEnabled(false);
             btn4Bi.setEnabled(bi3);
         }
 
         if (bi4) {
-            btn4Bi.setText(array_spinner[txtmat4] + " - 4º Bimestre " + txtSitFim4 + "- Nota " + medfim4); //==> aquisição da posição e valor  inserido no arry para leitura de shared pref
+
+            DecimalFormat fmt = new DecimalFormat("0.0");
+            String string = fmt.format(medfim4);
+            String[] part = string.split("[,]");
+            String r4 = part[0] + "." + part[1];
+
+            btn4Bi.setText(array_spinner[txtmat4] + " - 4º Bimestre " + " - " + txtSitFim4 + " - Nota " + r4); //==> aquisição da posição e valor  inserido no arry para leitura de shared pref
             btn4Bi.setEnabled(false);
             btnResFim.setEnabled(true);
 
-
             resFim = (medfim1 + medfim2 + medfim3 + medfim4) / 4;
-            double resFim = 10.0;
-            DecimalFormat formato = new DecimalFormat("#.#");
-            resFim = Double.valueOf(formato.format(resFim));
 
+            DecimalFormat fmt2 = new DecimalFormat("0.0");
+            String string2 = fmt2.format(resFim);
+            String[] part2 = string2.split("[,]");
+            String r = part2[0] + "." + part2[1];
 
+            if (resFim > 7) {
+                Toast.makeText(getApplicationContext(), "Aluno aprovado por média", Toast.LENGTH_LONG).show();
+                String test = " sua média final é:  " + (r);//==> uma forma de limpar o código
+                btnResFim.setText(test);
+            } else {
+                Toast.makeText(getApplicationContext(), "Aluno reprovado por média", Toast.LENGTH_LONG).show();
+                String test = " sua média final é:  " + (r);//==> uma forma de limpar o código
+                btnResFim.setText(test);
 
-            String test = " sua média final é " + (resFim);//==> uma forma de limpar o código
-            btnResFim.setText(test);
+            }
         }
     }
 
@@ -252,4 +297,3 @@ public class MainActivity extends AppCompatActivity {
         btn1Bi.setText("1º Bimestre");
     }
 }
-

@@ -11,6 +11,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -19,7 +21,11 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.lang.reflect.Field;
+import java.text.DecimalFormat;
 import java.util.Arrays;
+
+import static com.example.mediaescolar.MainActivity.SHARED_PREF;
 
 public class PrimeiroBiActivity extends AppCompatActivity {
 
@@ -62,16 +68,38 @@ public class PrimeiroBiActivity extends AppCompatActivity {
         Typeface font = Typeface.createFromAsset(getAssets(),
                 "print_bold_tt.ttf");
 
-        txtTit.setTypeface(font); txtMat1.setTypeface(font); txtProv1.setTypeface(font);
-        txtTrab1.setTypeface(font); edtProv1.setTypeface(font); edtTrab1.setTypeface(font);
-        txtMed1.setTypeface(font);txtSit1.setTypeface(font); txtMedFim1.setTypeface(font);
-        txtSitFim1.setTypeface(font);btnCalc.setTypeface(font);
+        txtTit.setTypeface(font);
+        txtMat1.setTypeface(font);
+        txtProv1.setTypeface(font);
+        txtTrab1.setTypeface(font);
+        edtProv1.setTypeface(font);
+        edtTrab1.setTypeface(font);
+        txtMed1.setTypeface(font);
+        txtSit1.setTypeface(font);
+        txtMedFim1.setTypeface(font);
+        txtSitFim1.setTypeface(font);
+        btnCalc.setTypeface(font);
 
 // Aqui é toda a declaração das listas do dropbox com o nome das matérias
 
         array_spinner = new String[]{Constant.MATEMATICA, Constant.BIOLOGIA, Constant.FILOSOFIA, Constant.FISICA, Constant.GEOGRAFIA, Constant.HISTORIA,
                 Constant.INGLES, Constant.LITERATURA, Constant.PORTUGUES, Constant.QUIMICA, Constant.SOCIOLOGIA, Constant.ARTES, Constant.ESPORTES};
         Arrays.sort(array_spinner);
+
+
+        try {
+            Field popup = Spinner.class.getDeclaredField("mPopup");
+            popup.setAccessible(true);
+
+            // Get private mPopup member variable and try cast to ListPopupWindow
+            android.widget.ListPopupWindow popupWindow = (android.widget.ListPopupWindow) popup.get(s);
+
+            // Set popupWindow height to 500px
+            popupWindow.setHeight(500);
+        } catch (NoClassDefFoundError | ClassCastException | NoSuchFieldException | IllegalAccessException e) {
+            // silently fail...
+        }
+
 
         ArrayAdapter adapter = new ArrayAdapter(this, R.layout.spinner_materia, array_spinner);
         s.setAdapter(adapter);
@@ -83,7 +111,6 @@ public class PrimeiroBiActivity extends AppCompatActivity {
 
                 selectedPosition = position;
 
-//                https://stackoverflow.com/questions/5068115/spinner-selection-save-to-sharedpreferences-then-retrieve
             }
 
             @Override
@@ -113,12 +140,12 @@ public class PrimeiroBiActivity extends AppCompatActivity {
                     if (edtProv1.getText().toString().length() > 0) {
                         notaProv1 = Double.parseDouble(edtProv1.getText().toString());
 
-                        if (notaProv1 > 10){
+                        if (notaProv1 > 10) {
                             ok = false;
-                            Toast.makeText(getApplicationContext(),"Nota inválida",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), "Nota inválida", Toast.LENGTH_SHORT).show();
                             edtProv1.requestFocus();
 
-                        } else{
+                        } else {
                             ok = true;
                         }
 
@@ -131,12 +158,12 @@ public class PrimeiroBiActivity extends AppCompatActivity {
                     if (edtTrab1.getText().toString().length() > 0) {
                         notaTrab1 = Double.parseDouble(edtTrab1.getText().toString());
 
-                        if (notaTrab1 >10){
+                        if (notaTrab1 > 10) {
                             ok = false;
-                            Toast.makeText(getApplicationContext(),"Nota Invalida",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), "Nota Invalida", Toast.LENGTH_SHORT).show();
 
-                        }else{
-                            ok =true;
+                        } else {
+                            ok = true;
                         }
 
                     } else {
@@ -146,9 +173,16 @@ public class PrimeiroBiActivity extends AppCompatActivity {
                     }
 
 //Aquisitando notas digitadas
+
                     if (ok) {
                         medfim1 = (notaProv1 + notaTrab1) / 2;
-                        txtMedFim1.setText(String.valueOf(medfim1));
+
+                        DecimalFormat fmt = new DecimalFormat("0.0");
+                        String string = fmt.format(medfim1);
+                        String[] part = string.split("[,]");
+                        String r1 = part[0] + "." + part[1];
+
+                        txtMedFim1.setText(r1);
 
                         if (medfim1 >= 7) txtSitFim1.setText("APROVADO");
                         else txtSitFim1.setText("REPROVADO");
@@ -171,10 +205,14 @@ public class PrimeiroBiActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "App Media Escolar", Snackbar.LENGTH_LONG)
+                Snackbar.make(view, "fazer mod ", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
+
+                clearBi1();
+
             }
         });
+
     }
 
     @Override
@@ -183,24 +221,9 @@ public class PrimeiroBiActivity extends AppCompatActivity {
         return true;
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-
-        int id = item.getItemId();
-
-        if (id == R.id.action_sair) {
-
-            finish();
-
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
     private void sharedPreferences() {
         SharedPreferences medEscPref =
-                getSharedPreferences(MainActivity.SHARED_PREF, 0);
+                getSharedPreferences(SHARED_PREF, 0);
         SharedPreferences.Editor medEsc =
                 medEscPref.edit();
 
@@ -214,6 +237,25 @@ public class PrimeiroBiActivity extends AppCompatActivity {
 
         medEsc.commit();
     }
+
+    private void clearBi1() {
+
+        edtProv1.setText("");
+        edtTrab1.setText("");
+        txtSitFim1.setText("Sua situação é :");
+        txtMedFim1.setText("Sua média final é:");
+        s.setSelection(0);
+        medfim1 = 0;
+        notaTrab1 = 0;
+        notaProv1 = 0;
+
+        clearSharedPreferences();
+    }
+
+    private void clearSharedPreferences() {
+        SharedPreferences medEscPref = getSharedPreferences(SHARED_PREF, 0);
+        SharedPreferences.Editor editor = medEscPref.edit();
+        editor.clear();
+        editor.commit();
+    }
 }
-
-

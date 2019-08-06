@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/background_all_act"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".MainActivity"
     tools:showIn="@layout/activity_primeiro_bi">
@@ -15,6 +16,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
         android:text="@string/BI1"
+        android:textColor="#ffffff"
         android:textSize="30sp" />
 
     <TextView
@@ -25,6 +27,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
         android:text="@string/Mat1"
+        android:textColor="#ffffff"
         android:textSize="16sp" />
 
     <Spinner
@@ -35,7 +38,8 @@
         android:layout_marginStart="20dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="20dp"
-        android:background="#ADD3D0D0" />
+        android:background="#ADD3D0D0"
+        android:textColor="#ffffff" />
 
     <TextView
         android:id="@+id/txtProv1"
@@ -45,6 +49,7 @@
         android:layout_marginStart="30dp"
         android:layout_marginTop="20dp"
         android:text="@string/Prov1"
+        android:textColor="#ffffff"
         android:textSize="16sp" />
 
     <TextView
@@ -57,6 +62,7 @@
         android:layout_marginTop="20dp"
         android:text="@string/Trab1"
         android:textAlignment="center"
+        android:textColor="#ffffff"
         android:textSize="16sp" />
 
     <TextView
@@ -64,11 +70,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/Spinner01"
+        android:layout_marginStart="40dp"
         android:layout_marginTop="20dp"
         android:layout_toEndOf="@id/txtTrab1"
-        android:layout_marginStart="40dp"
         android:text="@string/Med1"
-        android:textSize="16sp"/>
+        android:textColor="#ffffff"
+        android:textSize="16sp" />
 
 
     <EditText
@@ -76,11 +83,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/txtProv1"
-        android:layout_marginTop="10dp"
         android:layout_marginStart="30dp"
+        android:layout_marginTop="10dp"
         android:hint="@string/Prov1"
         android:inputType="numberDecimal"
         android:maxLength="3"
+        android:textColor="#ffffff"
+        android:textColorHint="#ffffff"
         android:textSize="16sp" />
 
 
@@ -94,6 +103,8 @@
         android:hint="@string/Trab1"
         android:inputType="numberDecimal"
         android:maxLength="3"
+        android:textColor="#ffffff"
+        android:textColorHint="#ffffff"
         android:textSize="16sp" />
 
     <TextView
@@ -101,13 +112,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/txtMed1"
-        android:layout_marginTop="20dp"
-        android:layout_toEndOf="@id/edtTrab1"
         android:layout_marginStart="40dp"
+        android:layout_marginTop="20dp"
         android:layout_marginEnd="20dp"
+        android:layout_toEndOf="@id/edtTrab1"
+        android:hint="@string/MedFim1"
         android:textAlignment="center"
-        android:textSize="16sp"
-        android:hint="@string/MedFim1"/>
+        android:textColor="#ffffff"
+        android:textColorHint="#ffffff"
+        android:textSize="16sp" />
 
     <TextView
         android:id="@+id/txtSit1"
@@ -117,6 +130,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
         android:text="@string/Sit1"
+        android:textColor="#ffffff"
         android:textSize="16sp" />
 
     <TextView
@@ -124,22 +138,28 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/txtSit1"
-        android:layout_marginTop="20dp"
         android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
         android:hint="@string/SitFim1"
-        android:textSize="16sp"
-        android:textAlignment="center"/>
+        android:textAlignment="center"
+        android:textColor="#ffffff"
+        android:textColorHint="#ffffff"
+        android:textSize="16sp" />
 
     <Button
         android:id="@+id/btnCalc1"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/txtSitFim1"
         android:layout_centerHorizontal="true"
+        android:layout_marginLeft="15dp"
         android:layout_marginTop="50dp"
+        android:layout_marginRight="15dp"
+        android:background="@drawable/btn_style_complete"
         android:text="@string/Calc1"
+        android:textColor="#ffffff"
         android:textSize="12sp"
-        android:textStyle="bold"/>
+        android:textStyle="bold" />
 </RelativeLayout>
 
 
