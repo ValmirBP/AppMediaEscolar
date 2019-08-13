@@ -1,5 +1,7 @@
 package com.example.mediaescolar;
 
+import android.app.AlertDialog;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
@@ -38,6 +40,7 @@ public class TerceiroBiActivity extends AppCompatActivity {
     boolean ok = true;
 
     private String array_spinner[];
+    private AlertDialog info;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +48,11 @@ public class TerceiroBiActivity extends AppCompatActivity {
         setContentView(R.layout.activity_terceiro_bi);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true); //todo consertar nullpointer msg
+        getSupportActionBar().setHomeButtonEnabled(true);
+        getSupportActionBar().setTitle("Voltar");
+
 
 // Instanciando elementos do layout
 
@@ -125,6 +133,7 @@ public class TerceiroBiActivity extends AppCompatActivity {
                         if (notaProv3 > 10) {
                             ok = false;
                             Toast.makeText(getApplicationContext(), "Nota Invalida", Toast.LENGTH_SHORT).show();
+                            info_notas();
                             edtProv3.requestFocus();
 
                         } else {
@@ -143,6 +152,7 @@ public class TerceiroBiActivity extends AppCompatActivity {
                         if (notaTrab3 > 10) {
                             ok = false;
                             Toast.makeText(getApplicationContext(), "Nota Invalida", Toast.LENGTH_SHORT).show();
+                            info_notas();
                             edtTrab3.requestFocus();
 
                         } else {
@@ -188,7 +198,7 @@ public class TerceiroBiActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "App Media Escolar", Snackbar.LENGTH_LONG)
+                Snackbar.make(view, "Dados apagados", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
 
                 clearBi3();
@@ -197,10 +207,33 @@ public class TerceiroBiActivity extends AppCompatActivity {
 
     }
 
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                startActivity(new Intent(this, MainActivity.class));
+                finishAffinity();
+                break;
+            default:
+                break;
+        }
+        return true;
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
+    }
+
+    public void info_notas() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle(R.string.important);
+        builder.setMessage(R.string.info_nota);
+        info = builder.create();
+        info.show();
     }
 
     private void sharedPerferences() {
@@ -225,8 +258,8 @@ public class TerceiroBiActivity extends AppCompatActivity {
 
         edtProv3.setText("");
         edtTrab3.setText("");
-        txtSitFim3.setText("Sua situação é :");
-        txtMedFim3.setText("Sua média final é:");
+        txtSitFim3.setText("Sua situação é:");
+        txtMedFim3.setText("");
         s.setSelection(0);
         medfim3 = 0;
         notaTrab3 = 0;

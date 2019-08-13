@@ -2,17 +2,20 @@
     <string name="app_name">Media Escolar</string>
     <string name="action_settings">Sair </string>
     <string name="BI1">1º Bimestre</string>
-    <string name="Mat1">Matéria</string>
+    <string name="Mat1">Escolha sua matéria</string>
     <string name="Prov1">Nota Prova</string>
     <string name="Trab1">Nota Trabalho</string>
     <string name="Med1">Média Final</string>
     <string name="Sit1">Situação</string>
     <string name="SitFim1">Sua situação é:</string>
-    <string name="MedFim1">Sua média final é: </string>
     <string name="Calc1">Calcular</string>
     <string name="Bi1">1º Bimestre</string>
     <string name="Bi2">2º Bimestre</string>
     <string name="Bi3">3º Bimestre</string>
     <string name="Bi4">4º Bimestre</string>
     <string name="resFim">Resultado Final</string>
+    <string name="ex">Ex : 10</string>
+    <string name="info_nota">As notas digitadas devem conter apenas 3 dígitos compreendidos entre 0.0 e 10 </string>
+    <string name="ok">OK</string>
+    <string name="important">Informação inportante!</string>
 </resources>

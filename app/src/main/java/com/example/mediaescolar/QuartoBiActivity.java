@@ -1,5 +1,7 @@
 package com.example.mediaescolar;
 
+import android.app.AlertDialog;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
@@ -39,6 +41,7 @@ public class QuartoBiActivity extends AppCompatActivity {
     boolean ok = true;
 
     private String array_spinner[];
+    private AlertDialog info;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -46,6 +49,10 @@ public class QuartoBiActivity extends AppCompatActivity {
         setContentView(R.layout.activity_quarto_bi);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true); //todo consertar nullpointer msg
+        getSupportActionBar().setHomeButtonEnabled(true);
+        getSupportActionBar().setTitle("Voltar");
 
 // Instanciando elementos do layout
 
@@ -85,6 +92,8 @@ public class QuartoBiActivity extends AppCompatActivity {
                 Constant.INGLES, Constant.LITERATURA, Constant.PORTUGUES, Constant.QUIMICA, Constant.SOCIOLOGIA, Constant.ARTES, Constant.ESPORTES};
         Arrays.sort(array_spinner);
 
+// restringindo o tamanho do spinner
+
         try {
             Field popup = Spinner.class.getDeclaredField("mPopup");
             popup.setAccessible(true);
@@ -107,7 +116,6 @@ public class QuartoBiActivity extends AppCompatActivity {
 
                 selectedPosition = position;
 
-//                https://stackoverflow.com/questions/5068115/spinner-selection-save-to-sharedpreferences-then-retrieve
             }
 
             @Override
@@ -140,7 +148,9 @@ public class QuartoBiActivity extends AppCompatActivity {
                         if (notaProv4 > 10) {
                             ok = false;
                             Toast.makeText(getApplicationContext(), "Nota Invalida", Toast.LENGTH_SHORT).show();
+                            info_notas();
                             edtProv4.requestFocus();
+
 
                         } else {
                             ok = true;
@@ -157,6 +167,7 @@ public class QuartoBiActivity extends AppCompatActivity {
                         if (notaTrab4 > 10) {
                             ok = true;
                             Toast.makeText(getApplicationContext(), "Nota Invalida", Toast.LENGTH_SHORT).show();
+                            info_notas();
                             edtTrab4.requestFocus();
 
                         } else {
@@ -201,7 +212,7 @@ public class QuartoBiActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "App Media Escolar", Snackbar.LENGTH_LONG)
+                Snackbar.make(view, "Dados apagados", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
 
                 clearBi4();
@@ -210,10 +221,33 @@ public class QuartoBiActivity extends AppCompatActivity {
 
     }
 
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                startActivity(new Intent(this, MainActivity.class));
+                finishAffinity();
+                break;
+            default:
+                break;
+        }
+        return true;
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
+    }
+
+    public void info_notas() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle(R.string.important);
+        builder.setMessage(R.string.info_nota);
+        info = builder.create();
+        info.show();
     }
 
 
@@ -239,8 +273,8 @@ public class QuartoBiActivity extends AppCompatActivity {
 
         edtProv4.setText("");
         edtTrab4.setText("");
-        txtSitFim4.setText("Sua situação é :");
-        txtMedFim4.setText("Sua média final é:");
+        txtSitFim4.setText("Sua situação é:");
+        txtMedFim4.setText("");
         s.setSelection(0);
         medfim4 = 0;
         notaTrab4 = 0;

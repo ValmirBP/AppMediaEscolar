@@ -1,5 +1,7 @@
 package com.example.mediaescolar;
 
+import android.app.AlertDialog;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
@@ -11,8 +13,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -40,6 +40,7 @@ public class PrimeiroBiActivity extends AppCompatActivity {
     int selectedPosition;
     boolean ok = true;
     private String array_spinner[];
+    private AlertDialog info;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -47,6 +48,10 @@ public class PrimeiroBiActivity extends AppCompatActivity {
         setContentView(R.layout.activity_primeiro_bi);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true); //todo consertar nullpointer msg
+        getSupportActionBar().setHomeButtonEnabled(true);
+        getSupportActionBar().setTitle("Voltar");
 
 // Instanciando elementos do layout
 
@@ -143,6 +148,7 @@ public class PrimeiroBiActivity extends AppCompatActivity {
                         if (notaProv1 > 10) {
                             ok = false;
                             Toast.makeText(getApplicationContext(), "Nota inválida", Toast.LENGTH_SHORT).show();
+                            info_notas();
                             edtProv1.requestFocus();
 
                         } else {
@@ -161,6 +167,7 @@ public class PrimeiroBiActivity extends AppCompatActivity {
                         if (notaTrab1 > 10) {
                             ok = false;
                             Toast.makeText(getApplicationContext(), "Nota Invalida", Toast.LENGTH_SHORT).show();
+                            info_notas();
 
                         } else {
                             ok = true;
@@ -205,7 +212,7 @@ public class PrimeiroBiActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "fazer mod ", Snackbar.LENGTH_LONG)
+                Snackbar.make(view, "Dados apagados", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
 
                 clearBi1();
@@ -214,6 +221,35 @@ public class PrimeiroBiActivity extends AppCompatActivity {
         });
 
     }
+
+    public void info_notas() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle(R.string.important);
+        builder.setMessage(R.string.info_nota);
+        info = builder.create();
+        info.show();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getOrder()) {
+
+            case 0:
+                startActivity(new Intent(this, MainActivity.class));
+                finishAffinity();
+                break;
+
+            case 100:
+                System.exit(0);
+
+            default:
+
+                break;
+            }
+
+            return true;
+        }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -242,8 +278,8 @@ public class PrimeiroBiActivity extends AppCompatActivity {
 
         edtProv1.setText("");
         edtTrab1.setText("");
-        txtSitFim1.setText("Sua situação é :");
-        txtMedFim1.setText("Sua média final é:");
+        txtSitFim1.setText("Sua situação é:");
+        txtMedFim1.setText("");
         s.setSelection(0);
         medfim1 = 0;
         notaTrab1 = 0;

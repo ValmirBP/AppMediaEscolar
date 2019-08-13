@@ -1,5 +1,6 @@
 package com.example.mediaescolar;
 
+import android.app.AlertDialog;
 import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
@@ -9,7 +10,6 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -37,7 +37,9 @@ public class SegundoBiActivity extends AppCompatActivity {
     double notaProv2, notaTrab2, medfim2;
     boolean ok = true;
     int selectedPosition;
+
     private String array_spinner[];
+    private AlertDialog info;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +47,11 @@ public class SegundoBiActivity extends AppCompatActivity {
         setContentView(R.layout.activity_segundo_bi);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true); //todo consertar nullpointer msg
+        getSupportActionBar().setHomeButtonEnabled(true);
+        getSupportActionBar().setTitle("Voltar");
+
 
 // Instanciando elementos do layout
 
@@ -140,6 +147,7 @@ public class SegundoBiActivity extends AppCompatActivity {
                         if (notaProv2 > 10) {
                             ok = false;
                             Toast.makeText(getApplicationContext(), "Nota Inválida", Toast.LENGTH_SHORT).show();
+                            info_notas();
                             edtProv2.requestFocus();
 
                         } else {
@@ -158,6 +166,7 @@ public class SegundoBiActivity extends AppCompatActivity {
                         if (notaTrab2 > 10) {
                             ok = false;
                             Toast.makeText(getApplicationContext(), "Nota Invalida", Toast.LENGTH_SHORT).show();
+                            info_notas();
                             edtTrab2.requestFocus();
 
                         } else {
@@ -203,7 +212,7 @@ public class SegundoBiActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "App Media Escolar", Snackbar.LENGTH_LONG)
+                Snackbar.make(view, "Dados apagados", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
 
                 clearBi2();
@@ -217,6 +226,14 @@ public class SegundoBiActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
+    }
+
+    public void info_notas() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle(R.string.important);
+        builder.setMessage(R.string.info_nota);
+        info = builder.create();
+        info.show();
     }
 
     private void sharedPreferences() {
@@ -240,8 +257,8 @@ public class SegundoBiActivity extends AppCompatActivity {
 
         edtProv2.setText("");
         edtTrab2.setText("");
-        txtSitFim2.setText("Sua situação é :");
-        txtMedFim2.setText("Sua média final é:");
+        txtSitFim2.setText("Sua situação é:");
+        txtMedFim2.setText("");
         s.setSelection(0);
         medfim2 = 0;
         notaTrab2 = 0;

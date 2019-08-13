@@ -39,6 +39,7 @@
         android:layout_marginTop="10dp"
         android:layout_marginEnd="20dp"
         android:background="#ADD3D0D0"
+        android:spinnerMode="dropdown"
         android:textColor="#ffffff" />
 
     <TextView
@@ -85,7 +86,7 @@
         android:layout_below="@id/txtProv1"
         android:layout_marginStart="30dp"
         android:layout_marginTop="10dp"
-        android:hint="@string/Prov1"
+        android:hint="@string/ex"
         android:inputType="numberDecimal"
         android:maxLength="3"
         android:textColor="#ffffff"
@@ -100,7 +101,7 @@
         android:layout_below="@+id/txtTrab1"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
-        android:hint="@string/Trab1"
+        android:hint="@string/ex"
         android:inputType="numberDecimal"
         android:maxLength="3"
         android:textColor="#ffffff"
@@ -114,10 +115,8 @@
         android:layout_below="@id/txtMed1"
         android:layout_marginStart="40dp"
         android:layout_marginTop="20dp"
-        android:layout_marginEnd="20dp"
+        android:layout_marginEnd="10dp"
         android:layout_toEndOf="@id/edtTrab1"
-        android:hint="@string/MedFim1"
-        android:textAlignment="center"
         android:textColor="#ffffff"
         android:textColorHint="#ffffff"
         android:textSize="16sp" />

@@ -126,6 +126,7 @@ public class MainActivity extends AppCompatActivity {
         result();
     }
 
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 
@@ -137,7 +138,6 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
 
         int id = item.getItemId();
-
 
         if (id == R.id.action_sair) {
 
