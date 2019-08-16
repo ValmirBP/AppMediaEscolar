@@ -4,9 +4,11 @@
     <item android:drawable="@drawable/btn_pressed_bi"
         android:state_pressed="true" />
 
-    <item android:drawable="@drawable/btn_style"
+    <item
+        android:drawable="@drawable/btn_style"
         android:state_enabled="true" />
 
-    <item android:drawable="@drawable/btn_desable_bi"
+    <item
+        android:drawable="@drawable/btn_desable_bi"
         android:state_enabled="false" />
 </selector>

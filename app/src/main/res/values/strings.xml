@@ -15,7 +15,8 @@
     <string name="Bi4">4º Bimestre</string>
     <string name="resFim">Resultado Final</string>
     <string name="ex">Ex : 10</string>
-    <string name="info_nota">As notas digitadas devem conter apenas 3 dígitos compreendidos entre 0.0 e 10 </string>
+    <string name="info_nota">As notas digitadas devem conter apenas 1 casa decimal, compreendidos entre 0.0 e 10. </string>
     <string name="ok">OK</string>
-    <string name="important">Informação inportante!</string>
+    <string name="important">Informação importante!</string>
+    <string name="info_cost">Para uma melhor experiência, recomendamos utilizar a mesma matéria em cada bimestre. </string>
 </resources>

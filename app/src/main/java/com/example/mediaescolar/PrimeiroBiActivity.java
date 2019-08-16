@@ -1,6 +1,7 @@
 package com.example.mediaescolar;
 
 import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Typeface;
@@ -8,6 +9,7 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -43,11 +45,14 @@ public class PrimeiroBiActivity extends AppCompatActivity {
     private AlertDialog info;
 
     @Override
+
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_primeiro_bi);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        info_costumer();
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true); //todo consertar nullpointer msg
         getSupportActionBar().setHomeButtonEnabled(true);
@@ -91,7 +96,6 @@ public class PrimeiroBiActivity extends AppCompatActivity {
                 Constant.INGLES, Constant.LITERATURA, Constant.PORTUGUES, Constant.QUIMICA, Constant.SOCIOLOGIA, Constant.ARTES, Constant.ESPORTES};
         Arrays.sort(array_spinner);
 
-
         try {
             Field popup = Spinner.class.getDeclaredField("mPopup");
             popup.setAccessible(true);
@@ -104,7 +108,6 @@ public class PrimeiroBiActivity extends AppCompatActivity {
         } catch (NoClassDefFoundError | ClassCastException | NoSuchFieldException | IllegalAccessException e) {
             // silently fail...
         }
-
 
         ArrayAdapter adapter = new ArrayAdapter(this, R.layout.spinner_materia, array_spinner);
         s.setAdapter(adapter);
@@ -148,7 +151,7 @@ public class PrimeiroBiActivity extends AppCompatActivity {
                         if (notaProv1 > 10) {
                             ok = false;
                             Toast.makeText(getApplicationContext(), "Nota inválida", Toast.LENGTH_SHORT).show();
-                            info_notas();
+                            info_grade();
                             edtProv1.requestFocus();
 
                         } else {
@@ -167,7 +170,7 @@ public class PrimeiroBiActivity extends AppCompatActivity {
                         if (notaTrab1 > 10) {
                             ok = false;
                             Toast.makeText(getApplicationContext(), "Nota Invalida", Toast.LENGTH_SHORT).show();
-                            info_notas();
+                            info_grade();
 
                         } else {
                             ok = true;
@@ -222,38 +225,28 @@ public class PrimeiroBiActivity extends AppCompatActivity {
 
     }
 
-    public void info_notas() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle(R.string.important);
-        builder.setMessage(R.string.info_nota);
-        info = builder.create();
-        info.show();
+    private void info_grade() {
+
+        DialogNotas dialogNotas = new DialogNotas();
+        dialogNotas.show(getSupportFragmentManager(), "grade");
+    }
+
+    private void info_costumer() {
+
+        DialogInfo dialogInfo = new DialogInfo();
+        dialogInfo.show(getSupportFragmentManager(), "infoCost");
+
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-
-        switch (item.getOrder()) {
-
-            case 0:
+    public boolean onOptionsItemSelected(MenuItem item) { //Botão adicional na ToolBar
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                sharedPreferences();
                 startActivity(new Intent(this, MainActivity.class));
-                finishAffinity();
                 break;
-
-            case 100:
-                System.exit(0);
-
-            default:
-
-                break;
-            }
-
-            return true;
+            default:break;
         }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
 

@@ -19,7 +19,7 @@
         android:layout_marginRight="15dp"
         android:background="@drawable/btn_style_complete"
         android:text="@string/Bi1"
-        android:textColor="#ffffff"
+
         android:textSize="14sp"
         android:textStyle="bold|italic" />
 
@@ -33,7 +33,7 @@
         android:background="@drawable/btn_style_complete"
         android:enabled="false"
         android:text="@string/Bi2"
-        android:textColor="#ffffff"
+
         android:textSize="14sp"
         android:textStyle="bold|italic" />
 
@@ -47,7 +47,7 @@
         android:background="@drawable/btn_style_complete"
         android:enabled="false"
         android:text="@string/Bi3"
-        android:textColor="#ffffff"
+
         android:textSize="14sp"
         android:textStyle="bold|italic" />
 
@@ -61,7 +61,7 @@
         android:background="@drawable/btn_style_complete"
         android:enabled="false"
         android:text="@string/Bi4"
-        android:textColor="#ffffff"
+
         android:textSize="14sp"
         android:textStyle="bold|italic" />
 
@@ -75,7 +75,7 @@
         android:background="@drawable/btn_style_complete"
         android:enabled="false"
         android:text="@string/resFim"
-        android:textColor="#ffffff"
+
         android:textSize="14sp"
         android:textStyle="bold|italic" />
 </LinearLayout>

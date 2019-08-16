@@ -158,6 +158,8 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+
+
     private void readPref() {
         SharedPreferences medEscPref =
                 getSharedPreferences(MainActivity.SHARED_PREF, 0);
@@ -216,7 +218,9 @@ public class MainActivity extends AppCompatActivity {
 
             btn1Bi.setText(array_spinner[txtmat1] + " - 1º Bimestre " + " - " + txtSitFim1 + " - Nota " + r1); //==> aquisição da posição e valor  inserido no arry para leitura de shared pref
             btn1Bi.setEnabled(false);
+            btn1Bi.setTextColor(getResources().getColor(R.color.text_desable));
             btn2Bi.setEnabled(bi1);
+            btn2Bi.setTextColor(getResources().getColor(R.color.text_enable));
         }
 
         if (bi2) {
@@ -228,7 +232,9 @@ public class MainActivity extends AppCompatActivity {
 
             btn2Bi.setText(array_spinner[txtmat2] + " - 2º Bimestre " + " - " + txtSitFim2 + " - Nota " + r2); //==> aquisição da posição e valor  inserido no arry para leitura de shared pref
             btn2Bi.setEnabled(false);
+            btn2Bi.setTextColor(getResources().getColor(R.color.text_desable));
             btn3Bi.setEnabled(bi2);
+            btn3Bi.setTextColor(getResources().getColor(R.color.text_enable));
         }
 
         if (bi3) {
@@ -240,7 +246,9 @@ public class MainActivity extends AppCompatActivity {
 
             btn3Bi.setText(array_spinner[txtmat3] + " - 3º Bimestre " + " - " + txtSitFim3 + " - Nota " + r3); //==> aquisição da posição e valor  inserido no arry para leitura de shared pref
             btn3Bi.setEnabled(false);
+            btn3Bi.setTextColor(getResources().getColor(R.color.text_desable));
             btn4Bi.setEnabled(bi3);
+            btn4Bi.setTextColor(getResources().getColor(R.color.text_enable));
         }
 
         if (bi4) {
@@ -252,7 +260,9 @@ public class MainActivity extends AppCompatActivity {
 
             btn4Bi.setText(array_spinner[txtmat4] + " - 4º Bimestre " + " - " + txtSitFim4 + " - Nota " + r4); //==> aquisição da posição e valor  inserido no arry para leitura de shared pref
             btn4Bi.setEnabled(false);
+            btn4Bi.setTextColor(getResources().getColor(R.color.text_desable));
             btnResFim.setEnabled(true);
+            btnResFim.setTextColor(getResources().getColor(R.color.text_enable));
 
             resFim = (medfim1 + medfim2 + medfim3 + medfim4) / 4;
 
@@ -295,5 +305,11 @@ public class MainActivity extends AppCompatActivity {
         btn3Bi.setText("3º Bimestre");
         btn2Bi.setText("2º Bimestre");
         btn1Bi.setText("1º Bimestre");
+
+        btn1Bi.setTextColor(getResources().getColor(R.color.text_enable));
+        btn2Bi.setTextColor(getResources().getColor(R.color.text_desable));
+        btn3Bi.setTextColor(getResources().getColor(R.color.text_desable));
+        btn4Bi.setTextColor(getResources().getColor(R.color.text_desable));
+        btnResFim.setTextColor(getResources().getColor(R.color.text_desable));
     }
 }
