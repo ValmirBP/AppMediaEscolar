@@ -19,6 +19,10 @@ Imagem 3: Tela do primeiro bimestre Reprovado
 
 Imagem 4: Tela principal com o resultado final. 
 
+# Versões:
+
+ Disponível para Ice Cream Sandwich (Android 4.0) em diante.
+ 
 # Modo de desenvolvimento:
 
 Interfaces de UI e UX personalizadas com avisos ao usuário, alertas de erros, tela full ( sem a exibição do nome da aplicação na área superior), icnoes de alerta modificados e listas de matérias personalizada e botões modificados.
